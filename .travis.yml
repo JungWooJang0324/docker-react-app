@@ -1,0 +1,21 @@
+# 관리자 권한
+sudo: required
+
+language: generic
+
+#도커 환경 구성
+services:
+  - docker
+
+# 스크립트를 구성 할 수있는 환경
+before_install:
+  - echo "start creating images with dockerfile"
+  - docker build -t jjwdocker/docker-react-app -f Dockerfile/dev .
+
+#실행할 스크립트(테스트 실행)
+script:
+  - docker run -e CI=true jjwdocker/docker-react-app npm run test -- --coverage
+
+# 테스트 후 할일
+after_success:
+  - echo "Test Success"
