@@ -16,6 +16,24 @@ before_install:
 script:
   - docker run -e CI=true jjwdocker/docker-react-app npm run test -- --coverage
 
-# 테스트 후 할일
-after_success:
-  - echo "Test Success"
+## 테스트 후 할일
+#after_success:
+#  - echo "Test Success"
+
+deploy:
+  # 외부 서비스 표시 (s3, elasticbeanstalk, firebase... )
+  provider: elasticbeanstalk
+  # 현재 사용하고 있는 AWS의 서비스가 위치한 물리적 장소
+  region: "ap-northeast-2"
+  #어플리케이션 이름
+  app: "DockerReactApp"
+  #환경 이름
+  env: "DockerReactApp-env"
+  #해당 elasticbeanstalk을 위한 s3이름
+  bucket_name: "elasticbeanstalk-ap-northeast-2-115610268363"
+  bucket_path: "DockerReactApp"
+  on:
+    #어떤 브랜치에 push할때 AWS에 배포 할 것인지?
+    branch: master
+access_key_id: $AWS_ACCESS_KEY
+secret_key_id: $AWS_PRIVATE_ACCESS_KEY
