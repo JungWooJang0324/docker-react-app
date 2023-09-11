@@ -36,4 +36,4 @@ deploy:
     #어떤 브랜치에 push할때 AWS에 배포 할 것인지?
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_key_id: $AWS_PRIVATE_ACCESS_KEY
+  secret_access_key: $AWS_PRIVATE_ACCESS_KEY
